@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'bounding_box.dart';
-import 'camera.dart';
+import 'camera_feed.dart';
 import 'dart:math' as math;
 import 'package:tflite/tflite.dart';
 
