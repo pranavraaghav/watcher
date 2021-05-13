@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
+// This is just a camera feed preview made for initial testing
+// Has nothing to do with realtime object detection
+
 class Camera extends StatefulWidget {
   Camera({Key key}) : super(key: key);
 
