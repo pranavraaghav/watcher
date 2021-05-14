@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'object_detection/live_camera.dart';
+import 'package:crosswalk/pages/home.dart';
 import 'package:camera/camera.dart';
 
 List<CameraDescription> cameras;
@@ -10,7 +10,9 @@ Future<void> main() async {
   cameras = await availableCameras();
 
   runApp(MaterialApp(
-    home: LiveFeed(cameras),
+    home: Home(
+      cameras: cameras,
+    ),
     theme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
   ));
