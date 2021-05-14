@@ -3,7 +3,6 @@ import 'package:camera/camera.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 import 'package:crosswalk/utils/image_utils.dart';
-import 'package:image/image.dart' as imglib;
 
 typedef void Callback(List<dynamic> list, int h, int w);
 
@@ -30,6 +29,8 @@ class _CameraFeedState extends State<CameraFeed> {
   bool imageReady = false;
   void captureImage(CameraImage img) async {
     png = await convertImagetoPng(img);
+    // Debugging
+    print(png.toString());
     imageReady = true;
   }
 
@@ -51,6 +52,10 @@ class _CameraFeedState extends State<CameraFeed> {
         setState(() {});
 
         controller.startImageStream((CameraImage img) {
+          if (imageReady) {
+            // Upload a report to API
+            imageReady = false;
+          }
           if (!isDetecting) {
             isDetecting = true;
             Tflite.detectObjectOnFrame(
@@ -125,7 +130,8 @@ class _CameraFeedState extends State<CameraFeed> {
       maxWidth:
           screenRatio > previewRatio ? screenH / previewH * previewW : screenW,
       // imageReady is set to true the first time a picture is taken.
-      child: (imageReady) ? Image.memory(png) : CameraPreview(controller),
+      // child: (imageReady) ? Image.memory(png) : CameraPreview(controller),
+      child: CameraPreview(controller),
     );
   }
 }
