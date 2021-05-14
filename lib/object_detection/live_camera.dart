@@ -7,7 +7,7 @@ import 'package:tflite/tflite.dart';
 
 class LiveFeed extends StatefulWidget {
   final List<CameraDescription> cameras;
-  LiveFeed(this.cameras);
+  LiveFeed({this.cameras});
   @override
   _LiveFeedState createState() => _LiveFeedState();
 }
