@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:crosswalk/object_detection/live_camera.dart';
 
 class Home extends StatelessWidget {
+  // cameras needed to be passed on to LiveFeed screen
   const Home({
     Key key,
     this.cameras,
