@@ -68,7 +68,8 @@ class _CameraFeedState extends State<CameraFeed> {
         // Frames are in Yuv420 format
         controller.startImageStream((CameraImage img) {
           if (isCapturedImageReady) {
-            // Upload a report to API
+            // TODO
+            // Handle sending image to backend
             isCapturedImageReady = false;
           }
           // Not quite sure why we use isDetecting
