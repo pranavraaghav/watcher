@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:crosswalk/object_detection/live_camera.dart';
+import 'package:crosswalk/pages/monitor.dart';
 
 class Home extends StatelessWidget {
   // cameras needed to be passed on to LiveFeed screen
@@ -20,6 +21,8 @@ class Home extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   print('Pushing to monitor screen');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Monitor()));
                 },
                 child: Text('Monitor')),
             ElevatedButton(

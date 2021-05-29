@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 import 'package:crosswalk/utils/image_utils.dart';
+
+import 'dart:typed_data' show Uint8List;
 
 // Custom callback to move data conveniently
 typedef void Callback(List<dynamic> list, int h, int w);
@@ -37,10 +43,45 @@ class _CameraFeedState extends State<CameraFeed> {
   // and converts it to a black-and-white PNG
   // This PNG as List<int>
   void captureImage(CameraImage frame) async {
-    png = await convertImagetoPng(frame);
+    convertImagetoPng(frame).then((png) {
+      uploadData(png);
+    });
     // Debugging
     // print(png.toString());
     isCapturedImageReady = true;
+  }
+
+  void addImageToFirebase() async {
+    FirebaseFirestore.instance
+        .collection('report')
+        .add({'timestamp': Timestamp.now()});
+  }
+
+  Future<void> uploadData(List<int> png) async {
+    Uint8List data = Uint8List.fromList(png);
+    var timestamp = Timestamp.now();
+
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('uploads/${timestamp.toString()}');
+
+    try {
+      // Upload raw data.
+      await ref.putData(data);
+    } on firebase_core.FirebaseException catch (e) {
+      print('SOMETHING WENT WRONG WITH uploadData() while adding to storage');
+      print(e);
+    }
+    try {
+      await ref.getDownloadURL().then((imageUrl) {
+        FirebaseFirestore.instance.collection('report').add({
+          'timestamp': timestamp,
+          'image': imageUrl.toString(),
+        });
+      });
+    } catch (e) {
+      print('SOMETHING WENT WRONG WITH uploadData() while adding to firestore');
+    }
   }
 
   @override
@@ -69,7 +110,7 @@ class _CameraFeedState extends State<CameraFeed> {
         controller.startImageStream((CameraImage img) {
           if (isCapturedImageReady) {
             // TODO
-            // Handle sending image to backend
+            // Add image to DB
             isCapturedImageReady = false;
           }
           // Not quite sure why we use isDetecting
@@ -110,8 +151,8 @@ class _CameraFeedState extends State<CameraFeed> {
                     stopwatch.start();
                     continue;
                   } else {
-                    // Frame is captured only once every 5000ms
-                    if (stopwatch.elapsedMilliseconds > 5000) {
+                    // Frame is captured only once every 10000ms
+                    if (stopwatch.elapsedMilliseconds > 10000) {
                       stopwatch.stop();
                       stopwatch.reset(); // sets stopwatch count back to 0
                       print('STOPWATCH RESET');
@@ -160,6 +201,7 @@ class _CameraFeedState extends State<CameraFeed> {
       maxWidth:
           screenRatio > previewRatio ? screenH / previewH * previewW : screenW,
       child: CameraPreview(controller),
+      // child: Text('TESTING'),
 
       // Comment out the previous line and uncomment the line after to view the images being captured
       // child: (isCapturedImageReady) ? Image.memory(png) : CameraPreview(controller),
