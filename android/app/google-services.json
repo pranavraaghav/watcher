@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "978517850727",
+    "project_id": "crosswalk-5bce1",
+    "storage_bucket": "crosswalk-5bce1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978517850727:android:fb4671f0500ebb0c2472c2",
+        "android_client_info": {
+          "package_name": "com.example.crosswalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978517850727-s28stegh9j47hvu645g22purl4lb0m2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRctqDNCYeXagVDh2Ktpz0Hs6GaQSG3d8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978517850727-s28stegh9j47hvu645g22purl4lb0m2m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
