@@ -1,8 +1,8 @@
 # Watcher
 
 ## TODO
-- Auth based data storage and retrieval (FireAuth) 
-- Settings menu
+- Logout
+- Settings
   - Choice for capture time interval 
-- Fix orientation problems. 
+- Fix orientation problems. (Its not a bug, its a feature) 
 - Order Monitor display by timestamp
