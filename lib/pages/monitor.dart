@@ -71,20 +71,23 @@ class _MonitorState extends State<Monitor> {
 
     _getReports();
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: reportCollection.snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final List<DocumentSnapshot> documents = snapshot.data.docs;
-          return ListView(
-            children: documents
-                .map(
-                  (doc) => Card(child: Image.network(doc['image'])),
-                )
-                .toList(),
-          );
-        }
-      },
+    return Scaffold(
+      appBar: AppBar(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: reportCollection.snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final List<DocumentSnapshot> documents = snapshot.data.docs;
+            return ListView(
+              children: documents
+                  .map(
+                    (doc) => Card(child: Image.network(doc['image'])),
+                  )
+                  .toList(),
+            );
+          }
+        },
+      ),
     );
   }
 }
