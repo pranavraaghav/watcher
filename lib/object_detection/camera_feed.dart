@@ -155,8 +155,8 @@ class _CameraFeedState extends State<CameraFeed> {
                     stopwatch.start();
                     continue;
                   } else {
-                    // Frame is captured only once every 10000ms
-                    if (stopwatch.elapsedMilliseconds > 10000) {
+                    // Frame is captured only once every 5000ms
+                    if (stopwatch.elapsedMilliseconds > 5000) {
                       stopwatch.stop();
                       stopwatch.reset(); // sets stopwatch count back to 0
                       print('STOPWATCH RESET');
