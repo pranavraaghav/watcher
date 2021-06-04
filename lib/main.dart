@@ -18,11 +18,7 @@ Future<void> main() async {
   cameras = await availableCameras();
   await Firebase.initializeApp();
 
-  runApp(MaterialApp(
-    home: MyApp(),
-    theme: ThemeData.dark(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -37,6 +33,7 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(),
         home: Wrapper(
           cameras: cameras,
         ),

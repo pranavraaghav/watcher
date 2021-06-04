@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:crosswalk/object_detection/live_camera.dart';
 import 'package:crosswalk/pages/monitor.dart';
+import 'package:crosswalk/widgets/drawer.dart';
 
 import 'package:crosswalk/models/user.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(),
+      drawer: DrawerWidget(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

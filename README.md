@@ -2,7 +2,6 @@
 
 ## TODO
 ### Home
-- Logout
 - Settings
   - Choice for capture time interval  
 
