@@ -66,8 +66,7 @@ class AuthService {
           email: email, password: password);
       User user = result.user;
 
-      await DatabaseService(uid: user.uid)
-          .updateUserData(email, displayName, GeoPoint(20.5937, 78.9629));
+      await DatabaseService(uid: user.uid).updateUserData(email, displayName);
 
       return _userFromFirebaseUser(user);
     } catch (e) {

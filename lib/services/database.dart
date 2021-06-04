@@ -12,11 +12,9 @@ class DatabaseService {
     return await usersCollection.doc(uid).get();
   }
 
-  Future updateUserData(
-      String email, String displayName, GeoPoint location) async {
+  Future updateUserData(String email, String displayName) async {
     return await usersCollection.doc(uid).set({
       'displayName': displayName,
-      'location': location,
       'email': email,
     });
   }
