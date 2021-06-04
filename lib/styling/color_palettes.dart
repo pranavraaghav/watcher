@@ -28,6 +28,11 @@ List<Color> crosswalkBlue = [
   Color(0xBA08479B),
 ];
 
+List<Color> crosswalkBlack = [
+  Color(0x242424),
+  Color(0x5A5A5A),
+];
+
 List<Color> sunset = [
   Color(0xffD65DB1),
   Color(0xffFF6F91),

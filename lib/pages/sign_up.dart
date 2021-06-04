@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: verticalGradient(crosswalkBlue),
+        gradient: verticalGradient(crosswalkBlack),
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
