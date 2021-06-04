@@ -5,6 +5,9 @@ import 'camera_feed.dart';
 import 'dart:math' as math;
 import 'package:tflite/tflite.dart';
 
+import 'package:crosswalk/models/user.dart';
+import 'package:provider/provider.dart';
+
 class LiveFeed extends StatefulWidget {
   final List<CameraDescription> cameras;
   LiveFeed(this.cameras);
@@ -43,6 +46,9 @@ class _LiveFeedState extends State<LiveFeed> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<CrosswalkUser>(context);
+    String uid = user.uid;
+
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +56,7 @@ class _LiveFeedState extends State<LiveFeed> {
       ),
       body: Stack(
         children: <Widget>[
-          CameraFeed(widget.cameras, setRecognitions),
+          CameraFeed(widget.cameras, setRecognitions, uid),
           BoundingBox(
             _recognitions == null ? [] : _recognitions,
             math.max(_imageHeight, _imageWidth),

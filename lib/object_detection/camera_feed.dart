@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import 'package:crosswalk/models/user.dart';
+import 'package:provider/provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:tflite/tflite.dart';
@@ -16,12 +19,13 @@ typedef void Callback(List<dynamic> list, int h, int w);
 class CameraFeed extends StatefulWidget {
   final List<CameraDescription> cameras;
   final Callback setRecognitions;
+  final String uid;
 
   // Contructor
   // 1. cameras is a list of all cameras, we choose the one we want later on
   // 2. setRecognitions passed to/from parent (LiveFeed) which uses
   //    this data to draw the boundary boxes for recognitions
-  CameraFeed(this.cameras, this.setRecognitions);
+  CameraFeed(this.cameras, this.setRecognitions, this.uid);
 
   @override
   _CameraFeedState createState() => new _CameraFeedState();
@@ -53,7 +57,7 @@ class _CameraFeedState extends State<CameraFeed> {
 
   void addImageToFirebase() async {
     FirebaseFirestore.instance
-        .collection('report')
+        .collection(widget.uid)
         .add({'timestamp': Timestamp.now()});
   }
 
@@ -74,7 +78,7 @@ class _CameraFeedState extends State<CameraFeed> {
     }
     try {
       await ref.getDownloadURL().then((imageUrl) {
-        FirebaseFirestore.instance.collection('report').add({
+        FirebaseFirestore.instance.collection(widget.uid).add({
           'timestamp': timestamp,
           'image': imageUrl.toString(),
         });

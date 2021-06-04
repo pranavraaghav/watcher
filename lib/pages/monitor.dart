@@ -8,32 +8,35 @@ class Item {
 }
 
 class Monitor extends StatefulWidget {
+  String uid;
+  Monitor({this.uid});
+
   @override
   _MonitorState createState() => _MonitorState();
 }
 
 class _MonitorState extends State<Monitor> {
-  List<Item> reports;
+  // List<Item> reports;
 
-  final CollectionReference reportCollection =
-      FirebaseFirestore.instance.collection('report');
+  // final CollectionReference reportCollection =
+  //     FirebaseFirestore.instance.collection(widget.uid);
 
-  @override
-  void initState() {
-    super.initState();
-    _getReports();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _getReports();
+  // }
 
-  void _getReports() {
-    reportCollection
-        .orderBy('timestamp', descending: true)
-        .snapshots()
-        .listen((result) {
-      result.docs.forEach((element) {
-        reports.add(element.data());
-      });
-    });
-  }
+  // void _getReports() {
+  //   reportCollection
+  //       .orderBy('timestamp', descending: true)
+  //       .snapshots()
+  //       .listen((result) {
+  //     result.docs.forEach((element) {
+  //       reports.add(element.data());
+  //     });
+  //   });
+  // }
 
   // @override
   // Widget build(BuildContext context) {
@@ -50,6 +53,24 @@ class _MonitorState extends State<Monitor> {
 
   @override
   Widget build(BuildContext context) {
+    List<Item> reports;
+
+    final CollectionReference reportCollection =
+        FirebaseFirestore.instance.collection(widget.uid);
+
+    void _getReports() {
+      reportCollection
+          .orderBy('timestamp', descending: true)
+          .snapshots()
+          .listen((result) {
+        result.docs.forEach((element) {
+          reports.add(element.data());
+        });
+      });
+    }
+
+    _getReports();
+
     return StreamBuilder<QuerySnapshot>(
       stream: reportCollection.snapshots(),
       builder: (context, snapshot) {
