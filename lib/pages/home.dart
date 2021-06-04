@@ -4,9 +4,6 @@ import 'package:crosswalk/object_detection/live_camera.dart';
 import 'package:crosswalk/pages/monitor.dart';
 import 'package:crosswalk/widgets/drawer.dart';
 
-import 'package:crosswalk/models/user.dart';
-import 'package:provider/provider.dart';
-
 class Home extends StatelessWidget {
   // cameras needed to be passed on to LiveFeed screen
   const Home({
@@ -16,9 +13,6 @@ class Home extends StatelessWidget {
   final List<CameraDescription> cameras;
 
   Widget build(BuildContext context) {
-    final user = Provider.of<CrosswalkUser>(context);
-    String uid = user.uid;
-
     return Scaffold(
       appBar: AppBar(),
       drawer: DrawerWidget(),
@@ -30,11 +24,11 @@ class Home extends StatelessWidget {
                 onPressed: () {
                   print('Pushing to monitor screen');
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Monitor(
-                                uid: uid,
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Monitor(),
+                    ),
+                  );
                 },
                 child: Text('Monitor')),
             ElevatedButton(
