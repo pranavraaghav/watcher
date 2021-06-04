@@ -36,7 +36,8 @@ class _CameraFeedState extends State<CameraFeed> {
   bool isDetecting = false;
   // Stopwatch to ensure a photo is taking once every 10 seconds
   Stopwatch stopwatch = new Stopwatch();
-
+  // Minimum confidence needed to click pick and upload
+  final minConfidence = 0.6;
   // I do not know what is happening. I am dead on the inside.
   List<int> png;
   // isCapturedImageReady decides what to show in build()
@@ -144,7 +145,8 @@ class _CameraFeedState extends State<CameraFeed> {
               // Looping through recognitions to check for "person"
               // Using a stopwatch to ensure app doesn't take 10 photos in a second.
               for (var recognition in recognitions) {
-                if (recognition['detectedClass'] == 'person') {
+                if (recognition['detectedClass'] == 'person' &&
+                    recognition['confidenceInClass'] > minConfidence) {
                   print('PERSON');
                   if (stopwatch.elapsedMilliseconds == 0) {
                     // Taking the picture
