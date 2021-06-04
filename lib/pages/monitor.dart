@@ -45,16 +45,27 @@ class _MonitorState extends State<Monitor> {
           if (snapshot.hasData) {
             final List<DocumentSnapshot> documents = snapshot.data.docs;
             return ListView(
-              children: documents
-                  .map(
-                    (doc) => RotatedBox(
+              children: documents.map((doc) {
+                var timestamp = DateTime.parse(
+                  doc['timestamp'].toDate().toString(),
+                );
+
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RotatedBox(
                       quarterTurns: 1,
                       child: Card(
                         child: Image.network(doc['image']),
                       ),
                     ),
-                  )
-                  .toList(),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Text(timestamp.toString()),
+                    ),
+                  ],
+                );
+              }).toList(),
             );
           }
         },
