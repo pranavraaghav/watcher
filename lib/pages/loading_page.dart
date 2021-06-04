@@ -19,7 +19,7 @@ class _LoadingPageState extends State<LoadingPage> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          gradient: verticalGradient(crosswalkBlue),
+          gradient: verticalGradient(night),
         ),
         child: Scaffold(
             backgroundColor: Colors.transparent,

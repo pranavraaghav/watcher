@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-//Used in Home Page
 Color mainBG = Color(0xffEAF0F8);
 Color neutral = Color(0xff8E98A4);
 Color primary = Color(0xff1A6BD6);
@@ -10,7 +9,6 @@ Color whiteTint = Color(0xffFDFEFF);
 Color cardGray = Color(0xff8E98A4);
 Color textColor = Color(0xff313A46);
 Color accentYellow = Color(0xffFFD700);
-//
 
 Color snow = Color(0xffFCF7F8);
 Color lightGray = Color(0xffCED3DC);
@@ -23,14 +21,9 @@ Color blackCoral = Color(0xff5B616A);
 
 Color loginYellow = Color(0xFFFFD700);
 
-List<Color> crosswalkBlue = [
-  Color(0xff2E86FB),
-  Color(0xBA08479B),
-];
-
-List<Color> crosswalkBlack = [
-  Color(0x242424),
-  Color(0x5A5A5A),
+List<Color> night = [
+  Color(0xff141717),
+  Color(0xff5C6463),
 ];
 
 List<Color> sunset = [

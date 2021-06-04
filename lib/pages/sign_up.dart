@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: verticalGradient(crosswalkBlack),
+        gradient: verticalGradient(night),
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           _obscureText, true),
                       buildTextField(context, 'Display Name',
                           displayNameTextController, _obscureText, false),
-                      buildTextField(context, "Password",
+                      buildTextField(context, "Password (6 chars min.)",
                           passwordTextController, _obscureText, false),
                       SizedBox(
                         height: 5,

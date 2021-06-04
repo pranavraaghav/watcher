@@ -78,26 +78,13 @@ class _MonitorState extends State<Monitor> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final List<DocumentSnapshot> documents = snapshot.data.docs;
-            return (documents == null)
-                ? ListView(
-                    children: documents
-                        .map(
-                          (doc) => Card(child: Image.network(doc['image'])),
-                        )
-                        .toList(),
+            return ListView(
+              children: documents
+                  .map(
+                    (doc) => Card(child: Image.network(doc['image'])),
                   )
-                : Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text('No images captured yet'),
-                      ],
-                    ),
-                  );
+                  .toList(),
+            );
           }
         },
       ),

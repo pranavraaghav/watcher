@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          gradient: verticalGradient(crosswalkBlack),
+          gradient: verticalGradient(night),
         ),
         child: Scaffold(
             resizeToAvoidBottomInset: false,
